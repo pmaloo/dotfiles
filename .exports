@@ -13,6 +13,7 @@ export LC_ALL='en_US.UTF-8';
 # Highlight section titles in manual pages.
 export LESS_TERMCAP_md="${yellow}";
 
+export NVM_DIR="/Users/pmaloo/.nvm"
 
 # For compilers to find gettext you may need to set:
 export LDFLAGS="-L/usr/local/opt/gettext/lib"
