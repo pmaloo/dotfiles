@@ -1,0 +1,15 @@
+[user]
+	email = pmaloo@expedia.com
+	name = Pulkit Maloo
+[core]
+	excludesfile = /Users/pmaloo/.gitignore
+	editor = vim
+[merge]
+    tool = vimdiff
+[credential]
+	helper = osxkeychain
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
