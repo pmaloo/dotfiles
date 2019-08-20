@@ -14,6 +14,8 @@ alias ll='ls -lh'
 alias la="ls -lha"
 # List only directories
 alias lsd='ls -l | grep "^d"'
+# List hidden files
+alias l.='ls -d .* --color=auto'
 
 # Always use color output for `ls`
 alias ls="command ls ${colorflag}"
@@ -70,14 +72,6 @@ alias vi=vim
 alias svi='sudo vi'
 alias vis='vim "+set si"'
 alias edit='vim'
-
-# IU Server names
-alias bigred2='maloop@bigred2.uits.iu.edu'
-alias karst='maloop@karst.uits.iu.edu'
-alias tank='maloop@tank.soic.indiana.edu'
-alias hulk='maloop@hulk.soic.indiana.edu'
-alias silo='maloop@silo.soic.indiana.edu'
-alias burrow='maloop@burrow.soic.indiana.edu'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

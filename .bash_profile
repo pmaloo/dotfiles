@@ -5,6 +5,7 @@ PATH=/usr/local/anaconda3/bin:$PATH
 PATH=/usr/local/opt/gettext/bin:$PATH
 PATH=/usr/local/opt/ncurses/bin:$PATH
 PATH=/usr/local/opt/findutils/libexec/gnubin:$PATH
+PATH=/usr/local/sbin:$PATH
 
 export PATH
 
