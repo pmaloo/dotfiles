@@ -6,3 +6,5 @@
 .functions
 .extra
 .condarc
+.gitconfig
+.gitignore
