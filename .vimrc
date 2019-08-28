@@ -26,6 +26,7 @@ Plug 'terryma/vim-expand-region'  "select incrementally larger regions
 
 """ window navigation
 Plug 'scrooloose/nerdtree'  "file-explorer
+Plug 'jistr/vim-nerdtree-tabs'  "nerd-tree addon
 "Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  "file-explorer
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jlanzarotta/bufexplorer'  "recent files
@@ -243,7 +244,7 @@ let g:NERDTreeWinPos = "right" " open on right
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 " close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -264,6 +265,9 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+" [vim-nerdtree-tabs]
+let g:nerdtree_tabs_open_on_gui_startup = 0
 
 "  [syntastic]
 set statusline+=%#warningmsg#
