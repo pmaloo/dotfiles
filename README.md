@@ -2,6 +2,8 @@
 
 Source: https://www.atlassian.com/git/tutorials/dotfiles
 
+Make sure to put everything particular to a system in `.extra`
+
 **Create the repository**
 ```
 git init --bare $HOME/.dotfiles
