@@ -38,7 +38,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'  "show diff
 Plug 'vim-syntastic/syntastic'  "syntax checker
 "Plug 'tmhedberg/SimpylFold' "Python code folding
-Plug 'alfredodeza/khuno.vim' "Python Flakes plugin 
+Plug 'alfredodeza/khuno.vim' "Python Flakes plugin
 Plug 'tpope/vim-surround'  "surround with parathesis
 Plug 'scrooloose/nerdcommenter'  "enhanced commenting
 Plug 'lervag/vimtex'  "enhanced latex editing
@@ -109,7 +109,7 @@ autocmd BufWinEnter *.* silent loadview
 " set working dir to the dir of current openned file
 autocmd BufEnter * silent! lcd %:p:h
 
-"set t_ti=""
+"set t_ti=""  "hide vim session buffer on exit
 
 " ------------------------ config keybind remap ------------------------
 " set leader
@@ -153,6 +153,7 @@ vnoremap / /\v
 nnoremap <leader>ev :vsplit ~/.vimrc<CR>
 nnoremap <leader>eb :vsplit ~/.bash_profile<CR>
 nnoremap <leader>ea :vsplit ~/.aliases<CR>
+nnoremap <leader>ee :vsplit ~/.extra<CR>
 
 " for terminal of vim8
 nnoremap th :ter<CR>
@@ -266,7 +267,7 @@ call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
-" [vim-nerdtree-tabs]
+"  [vim-nerdtree-tabs]
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
 "  [syntastic]
