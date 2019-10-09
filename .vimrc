@@ -59,6 +59,7 @@ set expandtab
 
 set ttyfast
 
+set mouse=a " enable mouse scrolling
 set title
 set showcmd
 " disable bell and beep sound
@@ -236,8 +237,9 @@ colorscheme monokai
 map tr :NERDTreeToggle<CR>
 "map <leader>nn :NERDTreeToggle<CR>
 let g:NERDTreeWinPos = "right" " open on right
- let g:NERDTreeWinSize = 50
-
+let g:NERDTreeWinSize = 50
+"let NERDTreeMapOpenInTab='<ENTER>' " open new tab on Enter
+"
 " open a NERDTree automatically when vim starts up if no files were specified
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
