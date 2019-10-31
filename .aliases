@@ -46,12 +46,13 @@ alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
 alias cd..='cd ..'
 #alias --='cd -'
 # a quick way to get out of current directory
-#alias ..='cd ..'
+alias ..='cd ../../'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
 alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
+alias .6='cd ../../../../../..'
 
 # Most frequently visited directories
 alias d="cd ~/Downloads/"
