@@ -35,6 +35,7 @@ Plug 'mhinz/vim-startify'  "startup-page
 
 """ programming
 Plug 'tpope/vim-fugitive'
+Plug 'valloric/youcompleteme' "code completion
 Plug 'mhinz/vim-signify'  "show diff
 Plug 'vim-syntastic/syntastic'  "syntax checker
 "Plug 'tmhedberg/SimpylFold' "Python code folding
@@ -80,6 +81,10 @@ set splitbelow
 set backspace=indent,eol,start
 
 set clipboard=unnamed
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
 
 " fold
 "set foldenable " enable folding
