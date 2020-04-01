@@ -21,8 +21,6 @@ unset file
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
 #source ~/.git-bash-for-mac.sh
-#. /Users/pulkitmaloo/anaconda3/etc/profile.d/conda.sh
-#source /usr/local/etc/profile.d/autojump.sh 
 
 # Autocorrect typos in path names when using `cd`
 shopt -s cdspell;
@@ -43,7 +41,6 @@ if which brew &> /dev/null && [ -f "$(brew --prefix)/share/bash-completion/bash_
 elif [ -f /etc/bash_completion ]; then
 	source /etc/bash_completion;
 fi;
-
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!

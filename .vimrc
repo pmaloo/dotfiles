@@ -193,7 +193,7 @@ nnoremap } }zz
 nnoremap g; g;zz
 nnoremap g, g,zz
 
-" move betweeb windows, used by vim-move
+" move between windows, used by vim-move
 nnoremap <Left> <C-w>h
 nnoremap <Right> <C-w>l
 nnoremap <Up> <C-w>k
@@ -281,10 +281,20 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_python_checkers=['pylint --ignore=E501']
 let g:syntastic_python_checkers=['python']
+let g:syntastic_enable_highlighting=0
+let g:syntastic_enable_signs=1
+highlight SyntasticError guibg=#550000
+highlight SyntasticWarning guibg=#331d1e
+highlight SyntasticErrorLine guibg=#550000
+highlight SyntasticWarningLine guibg=#331d1e
+highlight SyntasticStyleErrorLine guibg=#550000
+highlight SyntasticStyleWarningLine guibg=#331d1e
+let g:syntastic_quiet_messages = {'level': 'errors'}
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 "  [bufferexplorer]
