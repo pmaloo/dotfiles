@@ -57,3 +57,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# conda autocomplete
+eval "$(register-python-argcomplete conda)"

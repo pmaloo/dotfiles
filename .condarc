@@ -3,3 +3,27 @@ channels:
   - defaults
   - conda-forge
 report_errors: true
+create_default_packages:
+  - pip
+  - pep8
+  - pylint
+  - ipython
+  - jupyterlab
+  - nb_conda_kernels
+  - widgetsnbextension
+  - argcomplete
+  - setuptools
+  - wheel
+  - pytest
+  - pytest-ordering
+  - joblib
+  - nose
+  - tqdm
+  - scikit-learn
+  - statsmodels
+  - numpy
+  - pandas
+  - h5py
+  - matplotlib
+  - seaborn
+  - dask
