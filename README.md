@@ -35,7 +35,7 @@ config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
 xargs -I{} mv {} .dotfiles-backup/{}
 ```
 
-** Backup brew packages**
+**Backup brew packages**
 ```
 # Create Brewfile with list of packages installed
 brew bundle dump
