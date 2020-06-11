@@ -32,21 +32,29 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jlanzarotta/bufexplorer'  "recent files
 "Plug 'jlanzarotta/bufexplorer'  , { 'on': 'BufExplorer'}  "recent files
 Plug 'mhinz/vim-startify'  "startup-page
+Plug 'wincent/command-t'  "fuzzy search
+Plug 'mhinz/vim-grepper'  "code search
 
 """ programming
 Plug 'tpope/vim-fugitive'
-Plug 'valloric/youcompleteme' "code completion
+"Plug 'valloric/youcompleteme' "code completion
+Plug 'SirVer/ultisnips'  "code snippets
+Plug 'honza/vim-snippets'  "snippets
 Plug 'mhinz/vim-signify'  "show diff
 Plug 'vim-syntastic/syntastic'  "syntax checker
 "Plug 'tmhedberg/SimpylFold' "Python code folding
-Plug 'alfredodeza/khuno.vim' "Python Flakes plugin
 Plug 'tpope/vim-surround'  "surround with parathesis
+Plug 'FooSoft/vim-argwrap'  "argument wrapping
 Plug 'scrooloose/nerdcommenter'  "enhanced commenting
 Plug 'lervag/vimtex'  "enhanced latex editing
+Plug 'christoomey/vim-sort-motion'  "sorting
+Plug 'michaeljsmith/vim-indent-object'  "working with indent
+Plug 'tell-k/vim-autopep8'  "autopep8 for python
 "Plug 'dbeniamine/cheat.sh-vim'  "cheat-sheet
 
 """ misc
 Plug 'vim-scripts/vimwiki'  "for personal vim-notes(,ww)
+
 
 call plug#end()
 
@@ -79,12 +87,6 @@ set splitright
 set splitbelow
 " remove barrier for backspace in some cases
 set backspace=indent,eol,start
-
-set clipboard=unnamed
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
 
 " fold
 "set foldenable " enable folding
@@ -126,6 +128,13 @@ inoremap jk <ESC>
 inoremap kj <ESC>
 "inoremap <C-[> <ESC>
 
+" clipboard settings
+set clipboard=unnamed
+noremap <leader>y "*y
+noremap <leader>p "*p
+noremap <leader>Y "+y
+noremap <leader>P "+p
+
 " use 0 to get to first char
 map 0 ^
 " damn Shift key
@@ -136,10 +145,13 @@ cmap q1 q!
 " Send chars deleted with 'x' to the black hole
 nnoremap x "_x
 
-"  reselect the recetly pasted text
+" reselect the recently pasted text
 nnoremap <leader>v V`]
 nnoremap / /\v
 vnoremap / /\v
+
+" (yaf) to yank a file
+onoremap af :<C-u>normal! ggVG<CR>
 
 " <F1> to copy in normal/visual mode
 "nmap <F1> :.w !pbcopy<CR><CR>
@@ -167,7 +179,6 @@ nnoremap tv :vert ter<CR>
 
 " (,|) to vsplit
 nmap <leader><bar> :vsplit<CR><C-w>l
-nnoremap <leader>w <C-w>v<C-w>l
 " merge windws
 nnoremap fo :only<CR>
 
@@ -209,6 +220,9 @@ nnoremap <Down> <C-w>j
 
 "let g:indent_guides_guide_size=1
 "let g:indent_guides_enable_on_vim_startup = 1
+
+" Replace tabs with spaces.
+nnoremap <leader>rts :%s/	/    /g<CR>
 
 " ------------------------ functions ------------------------
 " Strip trailing whitespace (,ss)
@@ -277,31 +291,45 @@ call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 "  [vim-nerdtree-tabs]
 let g:nerdtree_tabs_open_on_gui_startup = 0
 
+"  [ultisnips]
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEnableSnipMate='no'
+let g:UltiSnipsSnippetDirectories=[$HOME . '/.vim/snippets']
+
+"  [vim-sort-motion]
+let g:sort_motion_flags = 'u' " Remove duplicates while sorting.
+
 "  [syntastic]
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-"let g:syntastic_python_checkers=['pylint --ignore=E501']
 let g:syntastic_python_checkers=['python']
-let g:syntastic_enable_highlighting=0
-let g:syntastic_enable_signs=1
-highlight SyntasticError guibg=#550000
-highlight SyntasticWarning guibg=#331d1e
-highlight SyntasticErrorLine guibg=#550000
-highlight SyntasticWarningLine guibg=#331d1e
-highlight SyntasticStyleErrorLine guibg=#550000
-highlight SyntasticStyleWarningLine guibg=#331d1e
-let g:syntastic_quiet_messages = {'level': 'errors'}
+"let g:syntastic_mode_map = {'mode': 'passive'}  "off by default
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs=1
+let g:syntastic_enable_highlighting = 0
 
 "  [bufferexplorer]
 nnoremap tt :BufExplorer<CR>
 
 "  [vim-move]
 let g:move_key_modifier = 'C'
+
+"  [vim-argwrap]
+nnoremap <silent> <leader>a :ArgWrap<CR>
+
+"  [vim-grepper]
+nnoremap <Leader>/ :Grepper<CR>
+nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+
+"  [vim-autopep8]
+let g:autopep8_max_line_length=150
+let g:autopep8_ignore="E731"
+let g:autopep8_diff_type='vertical'
+"let g:autopep8_on_save = 1
 
 "  [lightline]
 set laststatus=2

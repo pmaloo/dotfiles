@@ -6,6 +6,8 @@
 	editor = vim
 [merge]
     tool = vimdiff
+[rebase]
+    autosquash = true
 [credential]
 	helper = osxkeychain
 [filter "lfs"]
