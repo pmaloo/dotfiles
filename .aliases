@@ -27,6 +27,9 @@ alias clr='clear'
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
+# recursively remove .DS_Store
+alias rm_dsstore='find . -name '.DS_Store' -type f -delete'
+
 # Program aliases
 alias jl=jupyter-lab
 alias nb=jupyter-notebook
