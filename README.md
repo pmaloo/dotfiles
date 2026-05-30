@@ -13,13 +13,23 @@ cd ~/dotfiles && ./install
 
 | File | Purpose |
 |------|---------|
-| `zshrc` | ZSH config (prompt, PATH, completions, mise) |
+| `zshrc` | ZSH config (Oh My Zsh, pyenv, mise, brew) |
 | `bashrc` | Bash config |
 | `vimrc` | Vim config with vim-plug plugins |
 | `aliases` | Shared shell aliases (ls, navigation, brazil) |
 | `functions` | Shared shell functions (mkd, o) |
-| `gitconfig` | Git settings (rebase, merge, editor) |
+| `gitconfig` | Git settings (rebase, autosquash, vimdiff, gh credential) |
 | `gitignore` | Global gitignore patterns |
+| `Brewfile` | Homebrew packages, casks, and taps |
+| `Vscodefile` | VS Code extensions |
+
+## Plugins
+
+| Plugin | Purpose |
+|--------|---------|
+| [dotbot-brew](https://github.com/d12frosted/dotbot-brew) | Install Homebrew packages/casks from `Brewfile` |
+| [dotbot-vscode](https://github.com/hujianxin/dotbot-vscode) | Sync VS Code extensions from `Vscodefile` |
+| [crontab-dotbot](https://github.com/fundor333/crontab-dotbot) | Manage cron jobs declaratively |
 
 ## Managing symlinks (`install.conf.yaml`)
 
@@ -48,6 +58,35 @@ All symlink mappings are defined in `install.conf.yaml`. Dotbot reads this file 
    ~/.tmux.conf: tmux.conf
    ```
 3. Run `./install` to create the symlink
+
+### Adding a Homebrew package
+
+Add a line to `Brewfile`:
+
+```
+brew "ripgrep"
+cask "iterm2"
+```
+
+Then run `./install` to install it.
+
+### Adding a VS Code extension
+
+```bash
+code --list-extensions > ~/dotfiles/Vscodefile
+./install
+```
+
+### Adding a cron job
+
+Uncomment and edit the `crontab` section in `install.conf.yaml`:
+
+```yaml
+- crontab:
+  - cron: "0 2 * * *"
+    command: /path/to/backup.sh
+    comment: nightly backup
+```
 
 ### Linking a directory
 
