@@ -9,15 +9,27 @@ git clone --recursive https://github.com/pmaloo/dotfiles.git ~/dotfiles
 cd ~/dotfiles && ./install
 ```
 
+## Multi-platform support
+
+All shell configs (`zshrc`, `bashrc`, `functions`, `gitconfig`) are platform-aware using `$OSTYPE` detection. A single set of files works on both macOS and Linux — no need for separate branches or profiles.
+
+| Concern | macOS | Linux |
+|---------|-------|-------|
+| Homebrew | `/opt/homebrew` | `/home/linuxbrew/.linuxbrew` |
+| Opener | `open` | `xdg-open` |
+| Kiro CLI | `~/Library/Application Support/kiro-cli/` | `~/.local/share/kiro-cli/` |
+| Brazil | `/Users/pmaloo/.brazil_completion/` | `/home/pmaloo/.brazil_completion/` |
+| Casks in Brewfile | Installed | Skipped automatically |
+
 ## What's included
 
 | File | Purpose |
 |------|---------|
-| `zshrc` | ZSH config (Oh My Zsh, pyenv, mise, brew) |
-| `bashrc` | Bash config |
+| `zshrc` | ZSH config (Oh My Zsh, pyenv, mise, brew — platform-aware) |
+| `bashrc` | Bash config (platform-aware) |
 | `vimrc` | Vim config with vim-plug plugins |
 | `aliases` | Shared shell aliases (ls, navigation, brazil) |
-| `functions` | Shared shell functions (mkd, o) |
+| `functions` | Shared shell functions (mkd, o — platform-aware) |
 | `gitconfig` | Git settings (rebase, autosquash, vimdiff, gh credential) |
 | `gitignore` | Global gitignore patterns |
 | `Brewfile` | Homebrew packages, casks, and taps |

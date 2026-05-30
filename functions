@@ -5,9 +5,15 @@ function mkd() {
 
 # `o` with no arguments opens the current directory, otherwise opens the given location
 function o() {
-    if [ $# -eq 0 ]; then
-        open .;
+    local opener
+    if [[ "$OSTYPE" == darwin* ]]; then
+        opener="open"
     else
-        open "$@";
+        opener="xdg-open"
+    fi
+    if [ $# -eq 0 ]; then
+        $opener .;
+    else
+        $opener "$@";
     fi;
 }
