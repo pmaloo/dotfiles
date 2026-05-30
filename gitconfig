@@ -1,0 +1,14 @@
+[user]
+	name = Pulkit Maloo
+	email = pmaloo@amazon.com
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
+[merge]
+	tool = vimdiff
+[rebase]
+	autosquash = true
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true

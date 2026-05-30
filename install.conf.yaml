@@ -1,0 +1,19 @@
+- defaults:
+    link:
+      relink: true
+      force: true
+
+- clean: ['~']
+
+- link:
+    ~/.bashrc: bashrc
+    ~/.zshrc: zshrc
+    ~/.vimrc: vimrc
+    ~/.aliases: aliases
+    ~/.functions: functions
+    ~/.gitconfig: gitconfig
+    ~/.gitignore: gitignore
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+
