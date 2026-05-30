@@ -4,6 +4,7 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
+	pager =
 [merge]
 	tool = vimdiff
 [rebase]
@@ -13,8 +14,8 @@
 [pull]
 	rebase = true
 [credential "https://github.com"]
-	helper = 
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential

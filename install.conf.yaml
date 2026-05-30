@@ -17,3 +17,14 @@
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
 
+- brewfile:
+    - Brewfile
+
+- vscodefile:
+    file: Vscodefile
+    insiders: false
+
+# - crontab:
+#   - cron: "0 * * * *"
+#     command: echo "Hello world"
+#     comment: example cron job

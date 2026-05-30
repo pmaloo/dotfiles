@@ -1,20 +1,25 @@
 
 # Kiro CLI pre block. Keep at the top of this file.
-[[ -f "${HOME}/.local/share/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/zshrc.pre.zsh"
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 
-export BRAZIL_WORKSPACE_DEFAULT_LAYOUT=short
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
 
-export AUTO_TITLE_SCREENS="NO"
+ZSH_THEME="gozilla"
 
-# if you wish to use IMDS set AWS_EC2_METADATA_DISABLED=false
-export AWS_EC2_METADATA_DISABLED=true
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+)
 
-export PROMPT="
-%{$fg[white]%}(%D %*) <%?> [%~] $program %{$fg[default]%}
-%{$fg[cyan]%}%m %#%{$fg[default]%} "
+source $ZSH/oh-my-zsh.sh
 
-export RPROMPT=
+# Load aliases and functions
+[ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.functions ] && source ~/.functions
 
+# Terminal title helpers
 set-title() {
     echo -e "\e]0;$*\007"
 }
@@ -25,26 +30,24 @@ ssh() {
     set-title $HOST;
 }
 
-# Load aliases and functions
-[ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.functions ] && source ~/.functions
+# Created by `pipx` on 2025-02-24 03:29:42
+export PATH="$PATH:$HOME/.local/bin"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
 
+export PATH=$PATH:$HOME/.toolbox/bin
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(mise activate zsh)"
+source /Users/pmaloo/.brazil_completion/zsh_completion
 
-export PATH=$HOME/.toolbox/bin:$PATH
-autoload -Uz compinit && compinit
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/pmaloo/.lmstudio/bin"
 
-# Set up mise for runtime management
-eval "$(/home/pmaloo/.local/bin/mise activate zsh)"
-source ~/.local/share/mise/completions.zsh
-source /home/pmaloo/.brazil_completion/zsh_completion
-alias finch='sudo HOME=/home/pmaloo DOCKER_CONFIG=/home/pmaloo/.docker finch'
-export PATH=$HOME/.toolbox/bin:$PATH
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
 # Added by AIM CLI
-export PATH="/local/home/pmaloo/.aim/mcp-servers:$PATH"
-
+export PATH="$HOME/.aim/mcp-servers:$PATH"
 
 # Kiro CLI post block. Keep at the bottom of this file.
-[[ -f "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh"
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
