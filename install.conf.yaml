@@ -16,6 +16,7 @@
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
+    - ['defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/dotfiles/iterm2" && defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true', Configuring iTerm2 to load prefs from dotfiles]
 
 - brewfile:
     - Brewfile
