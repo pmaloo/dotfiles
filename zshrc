@@ -18,6 +18,13 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# fzf plugin needs FZF_BASE set before oh-my-zsh loads
+if [[ "$OSTYPE" == darwin* ]]; then
+  export FZF_BASE="/opt/homebrew/opt/fzf"
+else
+  export FZF_BASE="/home/linuxbrew/.linuxbrew/opt/fzf"
+fi
+
 plugins=(
   git
   fzf
