@@ -1,16 +1,10 @@
-# Detect which `ls` flavor is in use
-if ls --color > /dev/null 2>&1; then
-  colorflag="--color"
-else
-  colorflag="-G"
-fi
-
-# ls aliases
-alias ll='ls -lh'
-alias la="ls -lha"
-alias lsd='ls -l | grep "^d"'
-alias l.='ls -d .* --color=auto'
-alias ls="command ls ${colorflag}"
+# ls aliases (eza)
+alias ls='eza --icons --group-directories-first'
+alias ll='eza -l --icons --group-directories-first --git'
+alias la='eza -la --icons --group-directories-first --git'
+alias lsd='eza -lD --icons'
+alias l.='eza -d .* --icons'
+alias lt='eza --tree --icons --level=2'
 
 alias clr='clear'
 
@@ -22,6 +16,8 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+
+alias d='cd ~/Downloads/'
 
 # Colorize grep
 alias grep='grep --color=auto'

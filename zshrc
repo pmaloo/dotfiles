@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 
 # Kiro CLI pre block. Keep at the top of this file.
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -9,10 +16,13 @@ fi
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="gozilla"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
   git
+  fzf
+  zoxide
+  command-not-found
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
@@ -74,9 +84,30 @@ fi
 # Added by AIM CLI
 export PATH="$HOME/.aim/mcp-servers:$PATH"
 
+# Modern CLI tools
+alias cat='bat --paging=never'
+alias grep='rg'
+alias find='fd'
+alias diff='delta'
+
+# zoxide (smarter cd)
+eval "$(zoxide init zsh)"
+
+# fzf config
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --preview "bat --style=numbers --color=always --line-range :200 {}" --bind "ctrl-/:toggle-preview"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+
+# git-delta as git pager
+export GIT_PAGER='delta'
+
 # Kiro CLI post block. Keep at the bottom of this file.
 if [[ "$OSTYPE" == darwin* ]]; then
   [[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
 else
   [[ -f "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh"
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

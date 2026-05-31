@@ -4,9 +4,10 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
-	pager =
+	pager = delta
 [merge]
 	tool = vimdiff
+	conflictstyle = diff3
 [rebase]
 	autosquash = true
 [branch]
@@ -19,3 +20,9 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !gh auth git-credential
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
