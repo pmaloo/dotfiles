@@ -21,6 +21,17 @@ All shell configs (`zshrc`, `bashrc`, `functions`, `gitconfig`) are platform-awa
 | Brazil | `/Users/pmaloo/.brazil_completion/` | `/home/pmaloo/.brazil_completion/` |
 | Casks in Brewfile | Installed | Skipped automatically |
 
+## Cloud Desktop Bootstrap
+
+Set up a new Amazon Cloud Desktop in one command:
+
+```bash
+mwinit -o && toolbox install toolbox
+curl -sL https://raw.githubusercontent.com/pmaloo/dotfiles/master/bootstrap-cloud-desktop.sh | bash
+```
+
+See `bootstrap-cloud-desktop.sh` for what it installs.
+
 ## What's included
 
 | File | Purpose |
@@ -28,12 +39,27 @@ All shell configs (`zshrc`, `bashrc`, `functions`, `gitconfig`) are platform-awa
 | `zshrc` | ZSH config (Oh My Zsh, pyenv, mise, brew — platform-aware) |
 | `bashrc` | Bash config (platform-aware) |
 | `vimrc` | Vim config with vim-plug plugins |
-| `aliases` | Shared shell aliases (ls, navigation, brazil) |
+| `aliases` | Shared shell aliases (ls, tmux, git shortcuts) |
 | `functions` | Shared shell functions (mkd, o — platform-aware) |
 | `gitconfig` | Git settings (rebase, autosquash, vimdiff, gh credential) |
 | `gitignore` | Global gitignore patterns |
+| `tmux.conf` | tmux config (Ctrl+a prefix, mouse, splits) |
+| `p10k.zsh` | Powerlevel10k prompt config |
+| `work` | Work-specific aliases, functions, paths (see below) |
 | `Brewfile` | Homebrew packages, casks, and taps |
 | `Vscodefile` | VS Code extensions |
+| `bootstrap-cloud-desktop.sh` | One-command cloud desktop setup |
+
+## Portability: `~/.work`
+
+All work-specific config lives in a single file (`work`) sourced as `~/.work` from zshrc. When switching jobs, just remove or replace this file — everything else stays portable.
+
+The `work` file contains:
+- Employer-specific aliases (build system, internal tools)
+- Employer-specific PATH additions
+- Employer-specific env vars
+
+Machine-specific secrets (hostnames, credentials) go in `~/.local-env` (not tracked by git), which `work` sources automatically.
 
 ## Plugins
 
