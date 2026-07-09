@@ -13,6 +13,8 @@
     ~/.functions: functions
     ~/.gitconfig: gitconfig
     ~/.gitignore: gitignore
+    ~/.work: work
+    ~/.tmux.conf: tmux.conf
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]

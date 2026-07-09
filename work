@@ -1,0 +1,38 @@
+# Amazon-specific configuration
+# Remove this file (or unlink ~/.work) when leaving Amazon.
+# Everything else in dotfiles remains portable.
+
+# --- Aliases ---
+alias bb='brazil-build'
+alias bba='brazil-build apollo-pkg'
+alias bre='brazil-runtime-exec'
+alias brc='brazil-recursive-cmd'
+alias bws='brazil ws'
+alias bwsuse='bws use -p'
+alias bwscreate='bws create -n'
+alias bbr='brc brazil-build'
+alias bball='brc --allPackages'
+alias bbb='brc --allPackages brazil-build'
+alias bbra='bbr apollo-pkg'
+
+alias mw='mwinit -o'
+alias cds='ssh clouddesk'
+alias mc='meshclaw-open'
+
+# --- Functions ---
+
+# Quick brazil build with summary
+bbq() {
+    brazil-build release > /tmp/bb.log 2>&1 && echo "BUILD PASSED" || (tail -20 /tmp/bb.log && return 1)
+}
+
+# Port forward to cloud desktop
+cdport() {
+    ssh -L "$1":localhost:"$1" clouddesk -N
+}
+
+# --- Paths ---
+export PATH="$HOME/.toolbox/bin:$PATH"
+
+# --- Environment ---
+export CLOUD_DESKTOP="dev-dsk-pmaloo-2a-d5c3dd98.us-west-2.amazon.com"
