@@ -48,6 +48,3 @@ if [[ "$OSTYPE" == darwin* ]]; then
 else
   [[ -f "${HOME}/.local/share/kiro-cli/shell/bashrc.post.bash" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/bashrc.post.bash"
 fi
-
-# Added by AIM CLI
-export PATH="/local/home/pmaloo/.aim/mcp-servers:$PATH"

@@ -32,7 +32,12 @@ cdport() {
 }
 
 # --- Paths ---
-export PATH="$HOME/.toolbox/bin:$PATH"
+export PATH="$HOME/.toolbox/bin:$HOME/.aim/mcp-servers:$PATH"
+
+# --- AWS ---
+export AWS_PROFILE=notebook
 
 # --- Environment ---
-export CLOUD_DESKTOP="dev-dsk-pmaloo-2a-d5c3dd98.us-west-2.amazon.com"
+# Set CLOUD_DESKTOP in ~/.local-env (not tracked by git)
+# echo 'export CLOUD_DESKTOP="dev-dsk-yourhost.us-west-2.amazon.com"' > ~/.local-env
+[ -f ~/.local-env ] && source ~/.local-env
