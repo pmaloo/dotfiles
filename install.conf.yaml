@@ -15,6 +15,7 @@
     ~/.gitignore: gitignore
     ~/.work: work
     ~/.tmux.conf: tmux.conf
+    ~/.p10k.zsh: p10k.zsh
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
