@@ -85,7 +85,33 @@ Host clouddesk
 
 ### Persistent tunnel (LaunchAgent)
 
-`~/Library/LaunchAgents/com.pmaloo.meshclaw-tunnel.plist` — uses autossh to keep ports 7777 + 8888 forwarded. See the plist in the macbook-setup Chorus doc for the full XML.
+`~/Library/LaunchAgents/com.pmaloo.meshclaw-tunnel.plist` — uses autossh to keep ports 7777 + 8888 forwarded:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key><string>com.pmaloo.meshclaw-tunnel</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/autossh</string>
+        <string>-M</string><string>20000</string>
+        <string>-N</string>
+        <string>-o</string><string>ServerAliveInterval=15</string>
+        <string>-o</string><string>ServerAliveCountMax=3</string>
+        <string>-o</string><string>ExitOnForwardFailure=yes</string>
+        <string>-L</string><string>7777:localhost:7777</string>
+        <string>-L</string><string>8888:localhost:8888</string>
+        <string>clouddesk</string>
+    </array>
+    <key>RunAtLoad</key><true/>
+    <key>KeepAlive</key><true/>
+    <key>StandardOutPath</key><string>/tmp/meshclaw-tunnel.log</string>
+    <key>StandardErrorPath</key><string>/tmp/meshclaw-tunnel.err</string>
+</dict>
+</plist>
+```
 
 Load: `launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.pmaloo.meshclaw-tunnel.plist`
 

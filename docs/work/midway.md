@@ -17,8 +17,9 @@ Automated Midway credential refresh — YubiKey tap only, no PIN typing. Fires o
 | Component | Location | Purpose |
 |---|---|---|
 | `mwinit-auto.sh` | `~/.local/bin/` | Headless cert check → PIN from Keychain → mwinit → sync |
-| `.wakeup` | `~/` | sleepwatcher hook, calls mwinit-auto.sh on lid-open |
+| `.wakeup` | `~/` (symlinked from dotfiles) | sleepwatcher hook, calls mwinit-auto.sh on lid-open |
 | `mwinit-auto` plist | `~/Library/LaunchAgents/` | Every 15 min + login safety net |
+| `mwinit-refresh` plist | `~/Library/LaunchAgents/` | AEA posture cookie refresh every 55 min (no touch needed) |
 | `midway-sync` plist | `~/Library/LaunchAgents/` | WatchPaths cookie → scp to cloud desktops |
 | `mw` function | `~/.work` | Manual trigger: PIN → mwinit → sync |
 

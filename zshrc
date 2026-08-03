@@ -123,3 +123,9 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Added by smithy-mcp
+export PATH="$HOME/.config/smithy-mcp/mcp-servers:$PATH"
+
+# Brazil package cache ENVROOT for mcp-registry (needed until /apollo firmlink is active)
+export ENVROOT=$(ls -d ~/.toolbox/tools/brazilcli/*/ 2>/dev/null | sort -V | tail -1)

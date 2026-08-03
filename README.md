@@ -82,7 +82,7 @@ Machine-specific secrets (hostnames, credentials) go in `~/.local-env` (not trac
 | `tmux.conf` | tmux config |
 | `p10k.zsh` | Powerlevel10k prompt config |
 | `Brewfile` | Personal Homebrew packages, casks, VS Code extensions |
-| `Vscodefile` | VS Code extensions (legacy, now in Brewfile) |
+| `Vscodefile` | VS Code extensions (also in Brewfile; dotbot-vscode is backup for Linux) |
 
 ## Plugins
 

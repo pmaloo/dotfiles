@@ -17,14 +17,18 @@ The `./install` script (dotbot) symlinks configs:
 
 | Symlink | Target |
 |---|---|
+| `~/.bashrc` | `dotfiles/bashrc` |
 | `~/.zshrc` | `dotfiles/zshrc` |
+| `~/.vimrc` | `dotfiles/vimrc` |
 | `~/.aliases` | `dotfiles/aliases` |
 | `~/.functions` | `dotfiles/functions` |
 | `~/.gitconfig` | `dotfiles/gitconfig` |
-| `~/.vimrc` | `dotfiles/vimrc` |
+| `~/.gitconfig-work` | `dotfiles/gitconfig-work` (unlink when leaving) |
+| `~/.gitignore` | `dotfiles/gitignore` |
+| `~/.work` | `dotfiles/work` (unlink when leaving) |
 | `~/.tmux.conf` | `dotfiles/tmux.conf` |
 | `~/.p10k.zsh` | `dotfiles/p10k.zsh` |
-| `~/.work` | `dotfiles/work` (Amazon-specific, unlink when leaving) |
+| `~/.wakeup` | `dotfiles/wakeup` (sleepwatcher hook) |
 
 ## Shell
 
@@ -37,7 +41,7 @@ The `./install` script (dotbot) symlinks configs:
 - `brew bundle --file=~/dotfiles/Brewfile` installs everything
 - After installing anything new: add to `Brewfile`, commit, push
 - `pyenv` for Python versions, `rbenv` for Ruby, `mise` for polyglot runtimes
-- `nvm` for Node.js versions
+- `nvm` for Node.js versions (installed via its own curl script, not brew)
 
 ## Key Tools
 

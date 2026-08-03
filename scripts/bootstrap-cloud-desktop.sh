@@ -13,7 +13,7 @@ cd ~/dotfiles && ./dotbot/bin/dotbot -d . -c install.conf.yaml
 
 # === 2. Oh-My-Zsh + plugins ===
 if [ ! -d ~/.oh-my-zsh ]; then
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ] || \
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
@@ -71,47 +71,47 @@ if [ ! -f ~/.ssh/id_ecdsa ]; then
 fi
 
 # === 10. Systemd services ===
-sudo tee /etc/systemd/system/meshclaw.service > /dev/null << 'EOF'
+sudo tee /etc/systemd/system/meshclaw.service > /dev/null << EOF
 [Unit]
 Description=MeshClaw AI Agent Gateway
 After=network-online.target
 [Service]
 Type=simple
-User=pmaloo
-ExecStart=/home/pmaloo/.toolbox/bin/meshclaw gateway
+User=$USER
+ExecStart=$HOME/.toolbox/bin/meshclaw gateway
 Restart=always
 RestartSec=10
-WorkingDirectory=/home/pmaloo
-Environment=HOME=/home/pmaloo
-Environment=PATH=/home/pmaloo/.toolbox/bin:/usr/local/bin:/usr/bin
+WorkingDirectory=$HOME
+Environment=HOME=$HOME
+Environment=PATH=$HOME/.toolbox/bin:/usr/local/bin:/usr/bin
 [Install]
 WantedBy=multi-user.target
 EOF
 
-sudo tee /etc/systemd/system/meshclaw-tunnel.service > /dev/null << 'EOF'
+sudo tee /etc/systemd/system/meshclaw-tunnel.service > /dev/null << EOF
 [Unit]
 Description=MeshClaw Tunnel
 After=meshclaw.service
 BindsTo=meshclaw.service
 [Service]
 Type=simple
-User=pmaloo
-ExecStart=/home/pmaloo/.toolbox/bin/tunnel create 7777 --name meshclaw
+User=$USER
+ExecStart=$HOME/.toolbox/bin/tunnel create 7777 --name meshclaw
 Restart=always
 RestartSec=5
-Environment=HOME=/home/pmaloo
+Environment=HOME=$HOME
 [Install]
 WantedBy=multi-user.target
 EOF
 
-sudo tee /etc/systemd/system/startpage.service > /dev/null << 'EOF'
+sudo tee /etc/systemd/system/startpage.service > /dev/null << EOF
 [Unit]
 Description=Personal Startpage Server
 After=network.target
 [Service]
 Type=simple
-User=pmaloo
-WorkingDirectory=/home/pmaloo/startpage
+User=$USER
+WorkingDirectory=$HOME/startpage
 ExecStart=/usr/bin/python3 -m http.server 8888 --bind 127.0.0.1
 Restart=always
 RestartSec=5
@@ -125,13 +125,13 @@ sudo systemctl enable --now meshclaw meshclaw-tunnel startpage
 # === 11. Cron jobs ===
 (crontab -l 2>/dev/null | grep -v refresh-aea | grep -v update-stats; \
   echo '*/90 * * * * /usr/bin/mwinit --refresh-aea >/dev/null 2>&1'; \
-  echo '* * * * * /home/pmaloo/startpage/update-stats.sh') | crontab -
+  echo "* * * * * $HOME/startpage/update-stats.sh") | crontab -
 
 # === 12. Startpage ===
 mkdir -p ~/startpage
-cat > ~/startpage/update-stats.sh << 'STATS'
+cat > ~/startpage/update-stats.sh << STATS
 #!/bin/bash
-cat > /home/pmaloo/startpage/stats.json <<SJSON
+cat > $HOME/startpage/stats.json <<SJSON
 {
   "hostname": "$(hostname)",
   "uptime": "$(uptime -p 2>/dev/null || uptime | sed 's/.*up //' | sed 's/,.*//')",

@@ -15,6 +15,7 @@
     ~/.gitconfig-work: gitconfig-work
     ~/.gitignore: gitignore
     ~/.work: work
+    ~/.wakeup: wakeup
     ~/.tmux.conf: tmux.conf
     ~/.p10k.zsh: p10k.zsh
 

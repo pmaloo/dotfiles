@@ -48,3 +48,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
 else
   [[ -f "${HOME}/.local/share/kiro-cli/shell/bashrc.post.bash" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/bashrc.post.bash"
 fi
+
+export PATH=$HOME/.toolbox/bin:$PATH
+
+# Added by smithy-mcp
+export PATH="$HOME/.config/smithy-mcp/mcp-servers:$PATH"

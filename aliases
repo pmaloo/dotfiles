@@ -19,8 +19,7 @@ alias ....='cd ../../..'
 
 alias d='cd ~/Downloads/'
 
-# Colorize grep
-alias grep='grep --color=auto'
+# Colorize grep (overridden by rg alias in zshrc for zsh users)
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
