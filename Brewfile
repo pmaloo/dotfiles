@@ -1,5 +1,7 @@
 tap "autozimu/formulas"
+tap "MisterTea/et"
 
+brew "atuin"
 brew "autossh"
 brew "awscli"
 brew "bat"
@@ -48,8 +50,13 @@ brew "xz"
 brew "zlib"
 brew "zoxide"
 brew "zsh-autosuggestions"
+brew "yazi"
 brew "zsh-syntax-highlighting"
 brew "autozimu/formulas/unison-fsmonitor"
+brew "MisterTea/et/et"
+
+cask "omnidisksweeper"
+cask "raycast"
 
 cask "alfred"
 cask "betterdisplay"

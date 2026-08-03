@@ -127,5 +127,8 @@ export NVM_DIR="$HOME/.nvm"
 # Added by smithy-mcp
 export PATH="$HOME/.config/smithy-mcp/mcp-servers:$PATH"
 
+# Atuin (shell history)
+command -v atuin &>/dev/null && eval "$(atuin init zsh --disable-up-arrow)"
+
 # Brazil package cache ENVROOT for mcp-registry (needed until /apollo firmlink is active)
 export ENVROOT=$(ls -d ~/.toolbox/tools/brazilcli/*/ 2>/dev/null | sort -V | tail -1)
