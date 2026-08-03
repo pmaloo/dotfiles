@@ -7,30 +7,66 @@ Personal dotfiles managed with [dotbot](https://github.com/anishathalye/dotbot).
 ```bash
 git clone --recursive https://github.com/pmaloo/dotfiles.git ~/dotfiles
 cd ~/dotfiles && ./install
+brew bundle --file=~/dotfiles/Brewfile
+```
+
+## Structure
+
+```
+├── Personal (portable)
+│   ├── aliases, functions, zshrc, bashrc, vimrc, tmux.conf, p10k.zsh
+│   ├── gitconfig, gitignore
+│   ├── Brewfile, Vscodefile
+│   └── docs/mac.md
+│
+├── Work (unlink/delete when leaving)
+│   ├── work              → ~/.work
+│   ├── gitconfig-work    → ~/.gitconfig-work
+│   ├── Brewfile.work
+│   ├── scripts/bootstrap-cloud-desktop.sh
+│   └── docs/work/
+│       ├── cloud-desktop.md
+│       ├── midway.md
+│       └── meshclaw.md
+│
+└── Meta
+    ├── install.conf.yaml (dotbot symlinks)
+    ├── dotbot/, dotbot-brew/, dotbot-vscode/ (submodules)
+    └── this README
 ```
 
 ## Multi-platform support
 
-All shell configs (`zshrc`, `bashrc`, `functions`, `gitconfig`) are platform-aware using `$OSTYPE` detection. A single set of files works on both macOS and Linux — no need for separate branches or profiles.
+All shell configs are platform-aware using `$OSTYPE` detection. A single set of files works on both macOS and Linux.
 
 | Concern | macOS | Linux |
 |---------|-------|-------|
 | Homebrew | `/opt/homebrew` | `/home/linuxbrew/.linuxbrew` |
 | Opener | `open` | `xdg-open` |
 | Kiro CLI | `~/Library/Application Support/kiro-cli/` | `~/.local/share/kiro-cli/` |
-| Brazil | `/Users/pmaloo/.brazil_completion/` | `/home/pmaloo/.brazil_completion/` |
+| Brazil completion | macOS path | Linux path |
 | Casks in Brewfile | Installed | Skipped automatically |
 
 ## Cloud Desktop Bootstrap
 
-Set up a new Amazon Cloud Desktop in one command:
-
 ```bash
 mwinit -o && toolbox install toolbox
-curl -sL https://raw.githubusercontent.com/pmaloo/dotfiles/master/bootstrap-cloud-desktop.sh | bash
+curl -sL https://raw.githubusercontent.com/pmaloo/dotfiles/master/scripts/bootstrap-cloud-desktop.sh | bash
 ```
 
-See `bootstrap-cloud-desktop.sh` for what it installs.
+## Portability: personal vs work
+
+All work-specific config is isolated:
+
+| File | Purpose | On exit |
+|------|---------|---------|
+| `work` → `~/.work` | Work aliases, functions, PATH | Unlink |
+| `gitconfig-work` → `~/.gitconfig-work` | Work email + credentials | Unlink |
+| `Brewfile.work` | Work-only brew packages | Delete |
+| `scripts/` | Work bootstrap scripts | Delete |
+| `docs/work/` | Work setup documentation | Delete |
+
+Machine-specific secrets (hostnames, credentials) go in `~/.local-env` (not tracked), which `work` sources automatically.
 
 ## What's included
 
@@ -39,74 +75,37 @@ See `bootstrap-cloud-desktop.sh` for what it installs.
 | `zshrc` | ZSH config (Oh My Zsh, pyenv, mise, brew — platform-aware) |
 | `bashrc` | Bash config (platform-aware) |
 | `vimrc` | Vim config with vim-plug plugins |
-| `aliases` | Shared shell aliases (ls, tmux, git shortcuts) |
-| `functions` | Shared shell functions (mkd, o — platform-aware) |
-| `gitconfig` | Git settings (rebase, autosquash, vimdiff, gh credential) |
+| `aliases` | Shell aliases (eza, git, navigation) |
+| `functions` | Shell functions (mkd, o — platform-aware) |
+| `gitconfig` | Git settings (rebase, delta, gh credential) |
 | `gitignore` | Global gitignore patterns |
-| `tmux.conf` | tmux config (Ctrl+a prefix, mouse, splits) |
+| `tmux.conf` | tmux config |
 | `p10k.zsh` | Powerlevel10k prompt config |
-| `work` | Work-specific aliases, functions, paths (see below) |
-| `Brewfile` | Homebrew packages, casks, and taps |
-| `Vscodefile` | VS Code extensions |
-| `bootstrap-cloud-desktop.sh` | One-command cloud desktop setup |
-
-## Portability: `~/.work`
-
-All work-specific config lives in a single file (`work`) sourced as `~/.work` from zshrc. When switching jobs, just remove or replace this file — everything else stays portable.
-
-The `work` file contains:
-- Employer-specific aliases (build system, internal tools)
-- Employer-specific PATH additions
-- Employer-specific env vars
-
-Machine-specific secrets (hostnames, credentials) go in `~/.local-env` (not tracked by git), which `work` sources automatically.
+| `Brewfile` | Personal Homebrew packages, casks, VS Code extensions |
+| `Vscodefile` | VS Code extensions (legacy, now in Brewfile) |
 
 ## Plugins
 
 | Plugin | Purpose |
 |--------|---------|
-| [dotbot-brew](https://github.com/d12frosted/dotbot-brew) | Install Homebrew packages/casks from `Brewfile` |
+| [dotbot-brew](https://github.com/d12frosted/dotbot-brew) | Install Homebrew packages from `Brewfile` |
 | [dotbot-vscode](https://github.com/hujianxin/dotbot-vscode) | Sync VS Code extensions from `Vscodefile` |
 | [crontab-dotbot](https://github.com/fundor333/crontab-dotbot) | Manage cron jobs declaratively |
 
-## Managing symlinks (`install.conf.yaml`)
-
-All symlink mappings are defined in `install.conf.yaml`. Dotbot reads this file and creates symlinks from your home directory to the repo.
-
-```yaml
-- defaults:
-    link:
-      relink: true   # replace existing symlinks pointing elsewhere
-      force: true    # remove existing regular files/dirs before linking
-
-- clean: ['~']      # remove dead symlinks in ~
-
-- link:
-    ~/.zshrc: zshrc  # target_path: source_file_in_repo
-
-- shell:
-    - [git submodule update --init --recursive, Installing submodules]
-```
+## Common tasks
 
 ### Adding a new dotfile
 
-1. Copy or move the file into the repo: `cp ~/.tmux.conf ~/dotfiles/tmux.conf`
-2. Add a link entry to `install.conf.yaml`:
-   ```yaml
-   ~/.tmux.conf: tmux.conf
-   ```
-3. Run `./install` to create the symlink
+1. Move into the repo: `cp ~/.tmux.conf ~/dotfiles/tmux.conf`
+2. Add to `install.conf.yaml`: `~/.tmux.conf: tmux.conf`
+3. Run `./install`
 
 ### Adding a Homebrew package
 
-Add a line to `Brewfile`:
-
+```bash
+brew install <pkg>
+# Add to Brewfile (personal) or Brewfile.work (work-specific)
 ```
-brew "ripgrep"
-cask "iterm2"
-```
-
-Then run `./install` to install it.
 
 ### Adding a VS Code extension
 
@@ -126,6 +125,32 @@ Uncomment and edit the `crontab` section in `install.conf.yaml`:
     comment: nightly backup
 ```
 
+### Update on another machine
+
+```bash
+cd ~/dotfiles && git pull && ./install
+brew bundle --file=~/dotfiles/Brewfile
+```
+
+## Dotbot reference (`install.conf.yaml`)
+
+All symlink mappings are defined in `install.conf.yaml`:
+
+```yaml
+- defaults:
+    link:
+      relink: true   # replace existing symlinks pointing elsewhere
+      force: true    # remove existing regular files/dirs before linking
+
+- clean: ['~']      # remove dead symlinks in ~
+
+- link:
+    ~/.zshrc: zshrc  # target_path: source_file_in_repo
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
+```
+
 ### Linking a directory
 
 ```yaml
@@ -143,31 +168,10 @@ Uncomment and edit the `crontab` section in `install.conf.yaml`:
 
 ### Shell commands
 
-Add post-install commands under `shell`:
-
 ```yaml
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
     - [vim +PlugInstall +qall, Installing vim plugins]
 ```
 
-### Reference
-
 Full dotbot docs: https://github.com/anishathalye/dotbot#configuration
-
-## Update
-
-After making changes:
-
-```bash
-cd ~/dotfiles
-git add -A && git commit -m "description"
-git push
-```
-
-On another machine:
-
-```bash
-cd ~/dotfiles
-git pull && ./install
-```
