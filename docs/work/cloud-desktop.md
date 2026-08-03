@@ -9,7 +9,7 @@ After provisioning a new Cloud Desktop, SSH in and run:
 ```bash
 mwinit -o
 toolbox install toolbox
-curl -sL https://raw.githubusercontent.com/pmaloo/dotfiles/master/bootstrap-cloud-desktop.sh | bash
+curl -sL https://raw.githubusercontent.com/pmaloo/dotfiles/master/scripts/bootstrap-cloud-desktop.sh | bash
 ```
 
 That single script handles: dotfiles, oh-my-zsh, plugins, p10k, fzf, Node, toolbox registries, tools, MCP servers, Brazil config, SSH key, systemd services, crons, and startpage.
