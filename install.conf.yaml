@@ -12,6 +12,7 @@
     ~/.aliases: aliases
     ~/.functions: functions
     ~/.gitconfig: gitconfig
+    ~/.gitconfig-work: gitconfig-work
     ~/.gitignore: gitignore
     ~/.work: work
     ~/.tmux.conf: tmux.conf

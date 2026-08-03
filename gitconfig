@@ -1,6 +1,5 @@
 [user]
 	name = Pulkit Maloo
-	email = pmaloo@amazon.com
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
@@ -16,13 +15,15 @@
 	rebase = true
 [credential "https://github.com"]
 	helper =
-	helper = !gh auth git-credential
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper =
-	helper = !gh auth git-credential
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [interactive]
 	diffFilter = delta --color-only
 [delta]
 	navigate = true
 	side-by-side = true
 	line-numbers = true
+[include]
+	path = ~/.gitconfig-work

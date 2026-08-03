@@ -1,0 +1,8 @@
+# Amazon-specific packages — install with: brew bundle --file=~/dotfiles/Brewfile.work
+# Requires Midway auth for the amzn tap (CodeCommit)
+
+tap "amzn/amzn", "https://git-codecommit.us-west-2.amazonaws.com/v1/repos/HomebrewAmazon"
+
+brew "amzn/amzn/ninja-dev-sync"
+
+vscode "amazonwebservices.amazon-q-vscode"

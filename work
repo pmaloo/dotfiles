@@ -15,7 +15,19 @@ alias bball='brc --allPackages'
 alias bbb='brc --allPackages brazil-build'
 alias bbra='bbr apollo-pkg'
 
-alias mw='mwinit -o'
+mw() {
+    local pin
+    pin=$(security find-generic-password -s "mwinit" -a "$USER" -w 2>/dev/null)
+    if [ -n "$pin" ]; then
+        echo "$pin" | mwinit -f -s
+    else
+        echo "No PIN in Keychain — running interactive mwinit"
+        mwinit -o
+    fi
+    # Sync cookie to cloud desktops
+    scp ~/.midway/cookie clouddesk:~/.midway/cookie 2>/dev/null &
+    scp ~/.midway/cookie devdesk:~/.midway/cookie 2>/dev/null &
+}
 alias cds='ssh clouddesk'
 alias mc='meshclaw-open'
 

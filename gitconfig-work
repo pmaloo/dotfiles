@@ -1,0 +1,5 @@
+[user]
+	email = pmaloo@amazon.com
+[credential "https://git-codecommit.us-west-2.amazonaws.com"]
+	helper = !/opt/homebrew/bin/aws codecommit credential-helper $@
+	UseHttpPath = true
