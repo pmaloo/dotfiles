@@ -53,6 +53,38 @@ Then run the bootstrap script — it'll skip what's already present.
 | fzf | Fuzzy finder (Ctrl+R, Ctrl+T) |
 | BrazilCDN | Faster package downloads |
 
+## tmux Session Persistence
+
+Cloud Desktops reboot regularly for kernel patches (`sudo reboot`, automated patching). tmux keeps all session state in memory, so a reboot wipes every session. The AL2 system tmux is **1.8**, too old for the persistence plugins, so use the Homebrew build.
+
+```bash
+brew install tmux                                   # 3.x; wins over /usr/bin/tmux 1.8 in PATH
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+tmux new-session -d -s _setup && ~/.tmux/plugins/tpm/bin/install_plugins   # install resurrect + continuum
+```
+
+`tmux.conf` (portable dotfile) enables it:
+
+```
+set -g mouse on                                     # 2.1+ syntax; replaces the 1.8 mode-mouse block
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @resurrect-capture-pane-contents 'on'
+set -g @continuum-restore 'on'
+set -g @continuum-save-interval '15'
+run '~/.tmux/plugins/tpm/tpm'                        # keep LAST
+```
+
+| Behavior | Detail |
+|---|---|
+| Autosave | Every 15 min to `~/.local/share/tmux/resurrect/` |
+| Restore | Auto, when `tmux` server starts (i.e. first `tmux` after login) — **not** at boot |
+| Restored | Sessions, windows, panes, cwd, + visible pane text; default program allowlist (vim, less, tail…) |
+| **Not** restored | Arbitrary long-running processes — they don't auto-relaunch |
+
+For restore *without* logging in (detached jobs), add `set -g @continuum-boot 'on'` + a systemd user service (not set up).
+
 ## MCP Servers (Claude Code)
 
 All registered in `~/.claude.json` (user scope).
