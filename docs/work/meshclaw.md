@@ -69,6 +69,24 @@ Prevents MCP tools from breaking. Refreshes silently every 90 min (no YubiKey ne
 
 One `mwinit -o` in the morning → ~20h of uninterrupted auth.
 
+### Cron catch-up (recover jobs that 403'd before morning auth)
+
+MeshClaw's Bedrock creds come from `ada credential_process`, which can only mint a
+token while the Midway cookie is alive. Scheduled crons that fire *before* the
+morning tap (e.g. an 8:15am check-in) hit `403 security token expired` — and
+MeshClaw has **no native missed-run catch-up**, so a failed cron is dropped until
+its next occurrence (and auto-pauses after 5 straight failures).
+
+`scripts/meshclaw-catchup.sh` (→ `~/.local/bin/`, cron `*/15`) closes the gap: it
+self-guards on `aws sts get-caller-identity`, and only when creds are valid AND a
+job is in `error` does it `meshclaw cron trigger <id>` each failed job. So within
+~15 min of the morning tap, overnight-failed crons re-run once; success clears the
+error state so it never loops or trips auto-pause.
+
+```bash
+(crontab -l 2>/dev/null; echo '*/15 * * * * /home/pmaloo/.local/bin/meshclaw-catchup.sh >/dev/null 2>&1 #dotbot-crontab meshclaw-catchup') | crontab -
+```
+
 ## Laptop (SSH tunnel + token)
 
 ### SSH config
