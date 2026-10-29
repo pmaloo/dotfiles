@@ -29,6 +29,7 @@ The `./install` script (dotbot) symlinks configs:
 | `~/.tmux.conf` | `dotfiles/tmux.conf` |
 | `~/.p10k.zsh` | `dotfiles/p10k.zsh` |
 | `~/.wakeup` | `dotfiles/wakeup` (sleepwatcher hook) |
+| `~/.claude/skills/writing-style` | `dotfiles/claude/skills/writing-style` (Claude Code writing-style skill) |
 
 ## Shell
 

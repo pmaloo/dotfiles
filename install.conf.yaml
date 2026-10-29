@@ -19,6 +19,9 @@
     ~/.tmux.conf: tmux.conf
     ~/.p10k.zsh: p10k.zsh
     ~/.local/bin/meshclaw-catchup.sh: scripts/meshclaw-catchup.sh
+    ~/.claude/skills/writing-style:
+      path: claude/skills/writing-style
+      create: true
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
